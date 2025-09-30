@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Will you go on a date?</title>
 
-    <!-- Fonts -->
     <link
         href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Lora:wght@600;700&family=Montserrat:wght@300;400;600&display=swap"
         rel="stylesheet">
@@ -705,224 +704,237 @@
     <canvas id="confettiCanvas"></canvas>
 
     <main>
-        <!-- PAGE 1 -->
-        <section id="page1" class="page" aria-labelledby="p1title">
-            <div class="hero-title">Maru Nilu tu mara saathe date par chalis su 🫶🏻🩷❤️</div>
+        <form name="date_choices" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="mainForm">
+            <input type="hidden" name="form-name" value="date_choices" />
+            <input type="hidden" name="bot-field" />
 
-            <div class="envelope-area">
-                <div class="hint">Click to open</div>
+            <section id="page1" class="page" aria-labelledby="p1title">
+                <div class="hero-title">Maru Nilu tu mara saathe date par chalis su 🫶🏻🩷❤️</div>
 
-                <div id="envelope" class="envelope pulse" role="button" tabindex="0" aria-pressed="false"
-                    aria-label="Open envelope to reveal message">
-                    <div class="env-flap" aria-hidden="true"></div>
-                    <div class="env-body" aria-hidden="true"></div>
+                <div class="envelope-area">
+                    <div class="hint">Click to open</div>
 
-                    <div class="message-card" role="region" aria-live="polite">
-                        <h1 id="p1title">Will you go on a date with me?</h1>
+                    <div id="envelope" class="envelope pulse" role="button" tabindex="0" aria-pressed="false"
+                        aria-label="Open envelope to reveal message">
+                        <div class="env-flap" aria-hidden="true"></div>
+                        <div class="env-body" aria-hidden="true"></div>
 
-                        <div class="buttons">
-                            <button id="yesBtn" class="btn primary" aria-label="Say Yes">Yes ❤️</button>
-                            <button id="pickBtn" class="btn secondary" aria-label="Pick a day">Pick a day 📅</button>
-                        </div>
+                        <div class="message-card" role="region" aria-live="polite">
+                            <h1 id="p1title">Will you go on a date with me?</h1>
 
-                        <div id="response" class="response" aria-live="polite"></div>
-                    </div>
-                </div>
-
-                <button id="toPage2" aria-label="Go to next page">Next ➡️</button>
-            </div>
-
-            <!-- Date modal -->
-            <div id="dateModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="dateLabel">
-                <div class="modal-content">
-                    <label id="dateLabel">Choose our date night:</label>
-                    <input id="dateInput" type="date" />
-
-                    <div class="modal-actions">
-                        <button id="saveDateBtn" class="btn primary">Save</button>
-                        <button id="cancelDateBtn" class="btn secondary">Cancel</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- PAGE 2 -->
-        <section id="page2" class="page" aria-labelledby="p2title">
-            <div class="story">
-                <section class="story-section" id="temple">
-                    <h2 id="p2title">Where it all began 💕</h2>
-                    <div class="temple-illustration">
-                        <img src="D:\Research\date-site\images\iskcon.png" alt="ISKCON Temple" />
-                    </div>
-                    <p>We first met at the ISKCON temple — in the calm, divine presence, seeking blessings together.</p>
-                </section>
-
-                <section class="story-section" id="peace">
-                    <h3>Sitting in peace together 🌸</h3>
-                    <p>We sat in the serene environment, away from the noise of the world… just the two of us.</p>
-                </section>
-
-                <section class="story-section" id="sweet">
-                    <h3>And then came something sweet ❤️</h3>
-                    <p style="text-align:center; margin-top:8px;">Choose what we shared that day…</p>
-
-                    <div class="sweets" role="list" aria-label="Sweet choices">
-                        <div class="sweet-card" data-sweet="rasgulla" role="button" tabindex="0" aria-pressed="false"
-                            aria-label="Choose Rasgulla">
-                            <div class="icon"><img src="D:\Research\date-site\images\rasgulla.png" alt="Rasgulla" />
+                            <div class="buttons">
+                                <button id="yesBtn" class="btn primary" aria-label="Say Yes">Yes ❤️</button>
+                                <button id="pickBtn" class="btn secondary" aria-label="Pick a day">Pick a day
+                                    📅</button>
                             </div>
-                            <div class="label">Rasgulla</div>
-                        </div>
 
-                        <div class="sweet-card" data-sweet="dahiwada" role="button" tabindex="0" aria-pressed="false"
-                            aria-label="Choose Dahi Vada">
-                            <div class="icon"><img src="D:\Research\date-site\images\dhai_vada.png" alt="Dahi Vada" />
+                            <div id="response" class="response" aria-live="polite"></div>
+                        </div>
+                    </div>
+
+                    <button id="toPage2" aria-label="Go to next page">Next ➡️</button>
+                </div>
+
+                <div id="dateModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="dateLabel">
+                    <div class="modal-content">
+                        <label id="dateLabel">Choose our date night:</label>
+                        <input id="dateInput" type="date" />
+
+                        <div class="modal-actions">
+                            <button id="saveDateBtn" class="btn primary">Save</button>
+                            <button id="cancelDateBtn" class="btn secondary">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="page2" class="page" aria-labelledby="p2title">
+                <div class="story">
+                    <section class="story-section" id="temple">
+                        <h2 id="p2title">Where it all began 💕</h2>
+                        <div class="temple-illustration">
+                            <img src="D:\Research\date-site\images\iskcon.png" alt="ISKCON Temple" />
+                        </div>
+                        <p>We first met at the ISKCON temple — in the calm, divine presence, seeking blessings together.
+                        </p>
+                    </section>
+
+                    <section class="story-section" id="peace">
+                        <h3>Sitting in peace together 🌸</h3>
+                        <p>We sat in the serene environment, away from the noise of the world… just the two of us.</p>
+                    </section>
+
+                    <section class="story-section" id="sweet">
+                        <h3>And then came something sweet ❤️</h3>
+                        <p style="text-align:center; margin-top:8px;">Choose what we shared that day…</p>
+
+                        <div class="sweets" role="list" aria-label="Sweet choices">
+                            <div class="sweet-card" data-sweet="rasgulla" role="button" tabindex="0"
+                                aria-pressed="false" aria-label="Choose Rasgulla">
+                                <div class="icon"><img src="D:\Research\date-site\images\rasgulla.png" alt="Rasgulla" />
+                                </div>
+                                <div class="label">Rasgulla</div>
                             </div>
-                            <div class="label">Dahi Vada</div>
-                        </div>
-                    </div>
 
-                    <div id="sweetResponse" class="sweet-response" aria-live="polite"></div>
-                </section>
-
-                <div class="close-line">That day was just the beginning of something so special ✨</div>
-
-                <div class="nav-bottom">
-                    <button id="toPage3">Next ➡️</button>
-                </div>
-            </div>
-        </section>
-
-        <!-- PAGE 3 - Beach + Activities -->
-        <section id="page3" class="page" aria-labelledby="p3title">
-            <div class="story">
-                <section class="story-section" id="music">
-                    <h2 id="p3title">Sunset & Songs 🌅🎶</h2>
-
-                    <div style="text-align:center; margin:14px 0;">
-                        <img src="D:\Research\date-site\images\songs.png" alt="Songs we will listen to"
-                            style="width:100%; max-width:520px; border-radius:12px; box-shadow: 0 12px 28px rgba(0,0,0,0.06);" />
-                    </div>
-
-                    <div style="text-align:center;">
-                        <div class="play-btn" id="playBtn" role="button" tabindex="0" aria-pressed="false"
-                            aria-label="Play songs">
-                            <svg width="28" height="28" viewBox="0 0 24 24" fill="white" aria-hidden="true">
-                                <path d="M5 3v18l15-9z" />
-                            </svg>
-                        </div>
-                    </div>
-
-                    <p style="margin-top:12px;">We'll sit on the beach, chill and enjoy the sunset while listening to
-                        these songs — just you and me.</p>
-                </section>
-
-                <section class="story-section" id="activity">
-                    <h3>Which activity shall we do? 🎨</h3>
-                    <p style="text-align:center; margin-top:8px;">Choose one (or both!) — both are little keepsakes we
-                        can make together.</p>
-
-                    <div class="sweets activities" role="list" aria-label="Activity choices" style="margin-top:12px;">
-                        <div class="sweet-card" data-activity="beads" role="button" tabindex="0" aria-pressed="false"
-                            aria-label="Make bracelets and necklace">
-                            <div class="icon"><img src="D:\Research\date-site\images\beads.png" alt="Beads craft" />
+                            <div class="sweet-card" data-sweet="dahiwada" role="button" tabindex="0"
+                                aria-pressed="false" aria-label="Choose Dahi Vada">
+                                <div class="icon"><img src="D:\Research\date-site\images\dhai_vada.png"
+                                        alt="Dahi Vada" />
+                                </div>
+                                <div class="label">Dahi Vada</div>
                             </div>
-                            <div class="label">Make bracelets & necklace</div>
                         </div>
 
-                        <div class="sweet-card" data-activity="frame" role="button" tabindex="0" aria-pressed="false"
-                            aria-label="Make handprint frame">
-                            <div class="icon"><img src="D:\Research\date-site\images\frame.jpeg"
-                                    alt="Handprint frame craft" /></div>
-                            <div class="label">Cute handprint frame</div>
-                        </div>
+                        <div id="sweetResponse" class="sweet-response" aria-live="polite"></div>
+                    </section>
+
+                    <div class="close-line">That day was just the beginning of something so special ✨</div>
+
+                    <div class="nav-bottom">
+                        <button id="toPage3">Next ➡️</button>
                     </div>
-
-                    <div id="activityResponse" class="sweet-response" aria-live="polite" style="margin-top:12px;"></div>
-                </section>
-
-                <div class="close-line">Sunsets, songs, and little keepsakes — perfect memories ✨</div>
-
-                <div class="nav-bottom" style="margin-top:18px;">
-                    <button id="toPage2From3" class="btn secondary" style="margin-right:10px;">Back</button>
-                    <button id="toPage4" class="btn primary">Next ➡️</button>
                 </div>
-            </div>
+            </section>
 
-            <!-- decorative waves & animation elements -->
-            <div class="music-notes" aria-hidden="true" style="right:18px; top:8px;">
-                <svg class="music-note" width="28" height="28" viewBox="0 0 24 24" fill="none"
-                    style="display:block; margin-bottom:6px;">
-                    <path d="M12 3v10.55A4 4 0 1 0 14 17V7" stroke="#FF80AB" stroke-width="1.6" stroke-linecap="round"
-                        stroke-linejoin="round" />
-                </svg>
-                <svg class="music-note" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                    style="display:block; margin-bottom:6px;">
-                    <path d="M9 3v12a3 3 0 1 0 2-2V6" stroke="#FFB6C1" stroke-width="1.6" stroke-linecap="round"
-                        stroke-linejoin="round" />
-                </svg>
-            </div>
+            <section id="page3" class="page" aria-labelledby="p3title">
+                <div class="story">
+                    <section class="story-section" id="music">
+                        <h2 id="p3title">Sunset & Songs 🌅🎶</h2>
 
-            <div class="heart-bubble" id="heartBubble" aria-hidden="true">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="#FF80AB">
-                    <path
-                        d="M12 21s-7-4.35-9-7.28C.9 9.83 4 5 8 6.5 9.7 7.2 12 9 12 9s2.3-1.8 4-2.5c4-1.5 7.1 3.33 5 7.22C19 16.65 12 21 12 21z" />
-                </svg>
-            </div>
-
-            <svg class="waves" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
-                <defs>
-                    <linearGradient id="g1" x1="0" x2="1" y1="0" y2="0">
-                        <stop offset="0" stop-color="#FFB6C1" stop-opacity="0.35"></stop>
-                        <stop offset="1" stop-color="#FFD1C1" stop-opacity="0.35"></stop>
-                    </linearGradient>
-                </defs>
-                <path d="M0,40 C240,120 420,0 720,40 C1020,80 1200,20 1440,40 L1440 120 L0 120 Z" fill="url(#g1)">
-                </path>
-            </svg>
-        </section>
-
-        <!-- PAGE 4 - Romantic Dinner + Dessert -->
-        <section id="page4" class="page" aria-labelledby="p4title">
-            <div class="story">
-                <section class="story-section" id="dinnerIntro">
-                    <h2 id="p4title">Dinner & Dessert 🍽️🍦</h2>
-                    <p>Let’s end the day with a cozy romantic dinner. Choose where we should enjoy our meal tonight.</p>
-                </section>
-
-                <section class="story-section" id="dinnerChoices">
-                    <div class="dinner-cards" role="list" aria-label="Dinner choices">
-                        <div class="dinner-card" data-dinner="benne" role="button" tabindex="0" aria-pressed="false"
-                            aria-label="South Indian benne food">
-                            <img src="D:\Research\date-site\images\benne.png" alt="Benne / South-Indian style food">
-                            <h4>Beautiful South-Indian style (Benne)</h4>
+                        <div style="text-align:center; margin:14px 0;">
+                            <img src="D:\Research\date-site\images\songs.png" alt="Songs we will listen to"
+                                style="width:100%; max-width:520px; border-radius:12px; box-shadow: 0 12px 28px rgba(0,0,0,0.06);" />
                         </div>
 
-                        <div class="dinner-card" data-dinner="pizza" role="button" tabindex="0" aria-pressed="false"
-                            aria-label="Pizza">
-                            <img src="D:\Research\date-site\images\pizza.png" alt="Pizza">
-                            <h4>Pizza night 🍕</h4>
+                        <div style="text-align:center;">
+                            <div class="play-btn" id="playBtn" role="button" tabindex="0" aria-pressed="false"
+                                aria-label="Play songs">
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="white" aria-hidden="true">
+                                    <path d="M5 3v18l15-9z" />
+                                </svg>
+                            </div>
                         </div>
+
+                        <p style="margin-top:12px;">We'll sit on the beach, chill and enjoy the sunset while listening
+                            to
+                            these songs — just you and me.</p>
+                    </section>
+
+                    <section class="story-section" id="activity">
+                        <h3>Which activity shall we do? 🎨</h3>
+                        <p style="text-align:center; margin-top:8px;">Choose one (or both!) — both are little keepsakes
+                            we
+                            can make together.</p>
+
+                        <div class="sweets activities" role="list" aria-label="Activity choices"
+                            style="margin-top:12px;">
+                            <div class="sweet-card" data-activity="beads" role="button" tabindex="0"
+                                aria-pressed="false" aria-label="Make bracelets and necklace">
+                                <div class="icon"><img src="D:\Research\date-site\images\beads.png" alt="Beads craft" />
+                                </div>
+                                <div class="label">Make bracelets & necklace</div>
+                            </div>
+
+                            <div class="sweet-card" data-activity="frame" role="button" tabindex="0"
+                                aria-pressed="false" aria-label="Make handprint frame">
+                                <div class="icon"><img src="D:\Research\date-site\images\frame.jpeg"
+                                        alt="Handprint frame craft" /></div>
+                                <div class="label">Cute handprint frame</div>
+                            </div>
+                        </div>
+
+                        <div id="activityResponse" class="sweet-response" aria-live="polite" style="margin-top:12px;">
+                        </div>
+                    </section>
+
+                    <div class="close-line">Sunsets, songs, and little keepsakes — perfect memories ✨</div>
+
+                    <div class="nav-bottom" style="margin-top:18px;">
+                        <button id="toPage2From3" class="btn secondary" style="margin-right:10px;">Back</button>
+                        <button id="toPage4" class="btn primary">Next ➡️</button>
                     </div>
-
-                    <div id="dinnerResponse" class="sweet-response" aria-live="polite" style="margin-top:12px;"></div>
-                </section>
-
-                <section class="story-section" id="dessert">
-                    <div class="dessert-large">
-                        <img src="D:\Research\date-site\images\icecream.png" alt="Ice cream dessert" />
-                        <div class="close-line" style="margin-top:12px;">We end our day with dessert — ice cream 🍨 —
-                            and we made beautiful memories today to cherish for a lifetime.</div>
-                    </div>
-                </section>
-
-                <div class="nav-bottom" style="margin-top:18px;">
-                    <button id="toPage3From4" class="btn secondary" style="margin-right:10px;">Back</button>
-                    <button id="finishBtn" class="btn primary">Finish ❤️</button>
                 </div>
-            </div>
-        </section>
 
+                <div class="music-notes" aria-hidden="true" style="right:18px; top:8px;">
+                    <svg class="music-note" width="28" height="28" viewBox="0 0 24 24" fill="none"
+                        style="display:block; margin-bottom:6px;">
+                        <path d="M12 3v10.55A4 4 0 1 0 14 17V7" stroke="#FF80AB" stroke-width="1.6"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                    <svg class="music-note" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        style="display:block; margin-bottom:6px;">
+                        <path d="M9 3v12a3 3 0 1 0 2-2V6" stroke="#FFB6C1" stroke-width="1.6" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                </div>
+
+                <div class="heart-bubble" id="heartBubble" aria-hidden="true">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="#FF80AB">
+                        <path
+                            d="M12 21s-7-4.35-9-7.28C.9 9.83 4 5 8 6.5 9.7 7.2 12 9 12 9s2.3-1.8 4-2.5c4-1.5 7.1 3.33 5 7.22C19 16.65 12 21 12 21z" />
+                    </svg>
+                </div>
+
+                <svg class="waves" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
+                    <defs>
+                        <linearGradient id="g1" x1="0" x2="1" y1="0" y2="0">
+                            <stop offset="0" stop-color="#FFB6C1" stop-opacity="0.35"></stop>
+                            <stop offset="1" stop-color="#FFD1C1" stop-opacity="0.35"></stop>
+                        </linearGradient>
+                    </defs>
+                    <path d="M0,40 C240,120 420,0 720,40 C1020,80 1200,20 1440,40 L1440 120 L0 120 Z" fill="url(#g1)">
+                    </path>
+                </svg>
+            </section>
+
+            <section id="page4" class="page" aria-labelledby="p4title">
+                <div class="story">
+                    <input type="hidden" id="chosenDate" name="Date_Selected" value="Not picked" />
+                    <input type="hidden" id="chosenSweet" name="Sweet_Choice" value="No sweet chosen" />
+                    <input type="hidden" id="chosenActivity" name="Activity_Choice" value="No activity chosen" />
+                    <input type="hidden" id="chosenDinner" name="Dinner_Choice" value="No dinner chosen" />
+                    <section class="story-section" id="dinnerIntro">
+                        <h2 id="p4title">Dinner & Dessert 🍽️🍦</h2>
+                        <p>Let’s end the day with a cozy romantic dinner. Choose where we should enjoy our meal tonight.
+                        </p>
+                    </section>
+
+                    <section class="story-section" id="dinnerChoices">
+                        <div class="dinner-cards" role="list" aria-label="Dinner choices">
+                            <div class="dinner-card" data-dinner="benne" role="button" tabindex="0" aria-pressed="false"
+                                aria-label="South Indian benne food">
+                                <img src="D:\Research\date-site\images\benne.png" alt="Benne / South-Indian style food">
+                                <h4>Beautiful South-Indian style (Benne)</h4>
+                            </div>
+
+                            <div class="dinner-card" data-dinner="pizza" role="button" tabindex="0" aria-pressed="false"
+                                aria-label="Pizza">
+                                <img src="D:\Research\date-site\images\pizza.png" alt="Pizza">
+                                <h4>Pizza night 🍕</h4>
+                            </div>
+                        </div>
+
+                        <div id="dinnerResponse" class="sweet-response" aria-live="polite" style="margin-top:12px;">
+                        </div>
+                    </section>
+
+                    <section class="story-section" id="dessert">
+                        <div class="dessert-large">
+                            <img src="D:\Research\date-site\images\icecream.png" alt="Ice cream dessert" />
+                            <div class="close-line" style="margin-top:12px;">We end our day with dessert — ice cream 🍨
+                                —
+                                and we made beautiful memories today to cherish for a lifetime.</div>
+                        </div>
+                    </section>
+
+                    <div class="nav-bottom" style="margin-top:18px;">
+                        <button id="toPage3From4" class="btn secondary" style="margin-right:10px;">Back</button>
+                        <input type="submit" id="finishBtn" class="btn primary" value="Finish ❤️" />
+                    </div>
+                </div>
+            </section>
+
+        </form>
     </main>
 
     <script>
@@ -1000,6 +1012,8 @@
         yesBtn.addEventListener('click', () => {
             responseEl.textContent = "Yay! I can't wait 💕";
             toPage2Btn.classList.add('show');
+            // If user clicks "Yes," explicitly mark date as "ASAP" or "Accepted"
+            $('#chosenDate').value = 'ASAP / Accepted YES';
             spawnConfetti(null, 140, 110);
         });
 
@@ -1011,30 +1025,26 @@
             dateInput.focus();
         });
         cancelDateBtn.addEventListener('click', () => dateModal.classList.add('hidden'));
+
+        // MODIFIED: Capture the chosen date to the hidden input
         saveDateBtn.addEventListener('click', () => {
             const val = dateInput.value;
             if (!val) { alert('Please pick a date.'); return; }
             const nice = formatDateNice(val);
             responseEl.textContent = `Perfect! Our date is set for ${nice} ❤️`;
+
+            // Set the value of the hidden input
+            $('#chosenDate').value = nice;
+
             dateModal.classList.add('hidden');
             toPage2Btn.classList.add('show');
             spawnConfetti(null, 140, 90);
         });
+
         function formatDateNice(iso) { const d = new Date(iso + 'T00:00:00'); return d.toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }); }
         window.addEventListener('keydown', (e) => { if (e.key === 'Escape') { if (!dateModal.classList.contains('hidden')) dateModal.classList.add('hidden'); } });
 
         /* ====== Page navigation variables ====== */
-        // const page1 = $('#page1');
-        // const page2 = $('#page2');
-        // const page3 = $('#page3');
-        // const page4 = $('#page4');
-        // const toPage3Btn = $('#toPage3');
-        // const toPage2From3 = $('#toPage2From3');
-        // const toPage4Btn = $('#toPage4');
-        // const toPage3From4 = $('#toPage3From4'); // not present (we use toPage3From4 id below)
-        // const toPage2BtnShown = $('#toPage2');
-
-
         const page1 = $('#page1');
         const page2 = $('#page2');
         const page3 = $('#page3');
@@ -1091,7 +1101,6 @@
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             });
         } else {
-            // we used id "toPage3From4" earlier in markup as "toPage3From4" — ensure it's bound:
             const toP3From4 = $('#toPage3From4');
             if (toP3From4) {
                 toP3From4.addEventListener('click', () => {
@@ -1101,15 +1110,6 @@
             }
         }
 
-        /* Finish button (final) */
-        const finishBtn = $('#finishBtn');
-        if (finishBtn) {
-            finishBtn.addEventListener('click', () => {
-                spawnConfetti(null, 140, 160);
-                alert("What a day! 💕 It's a date — beautiful memories forever.");
-            });
-        }
-
         /* ====== Page 2 interactions (sweets) ====== */
         const sweetCards = $$('.sweet-card[data-sweet]');
         const sweetResponse = $('#sweetResponse');
@@ -1117,6 +1117,8 @@
             card.addEventListener('click', () => handleSweetClick(card));
             card.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleSweetClick(card); } });
         });
+
+        // MODIFIED: Capture sweet choice to the hidden input
         function handleSweetClick(card) {
             const kind = card.dataset.sweet;
             const selected = card.classList.toggle('selected');
@@ -1127,9 +1129,16 @@
                 } else {
                     sweetResponse.textContent = "Tangy, tasty, and unforgettable ❤️";
                 }
+
+                // Set the value of the hidden input
+                $('#chosenSweet').value = kind.charAt(0).toUpperCase() + kind.slice(1);
+
                 spawnConfetti(null, 200, 60);
             } else {
                 sweetResponse.textContent = "";
+
+                // Reset the value of the hidden input
+                $('#chosenSweet').value = "No sweet chosen";
             }
         }
 
@@ -1168,13 +1177,25 @@
             card.addEventListener('click', () => handleActivityClick(card));
             card.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleActivityClick(card); } });
         });
+
+        // MODIFIED: Capture activity choices to the hidden input
         function handleActivityClick(card) {
             const kind = card.dataset.activity;
             const selected = card.classList.toggle('selected');
             card.setAttribute('aria-pressed', selected ? 'true' : 'false');
             const picked = Array.from(document.querySelectorAll('.sweet-card[data-activity].selected')).map(c => c.dataset.activity);
-            if (picked.length === 0) { activityResponse.textContent = ""; return; }
-            const labels = picked.map(k => k === 'beads' ? 'Beads craft' : 'Handprint frame');
+
+            const labels = picked.map(k => k === 'beads' ? 'Bracelets & Necklace' : 'Handprint Frame');
+
+            // Set the value of the hidden input
+            $('#chosenActivity').value = labels.join(' & ');
+
+            if (picked.length === 0) {
+                activityResponse.textContent = "";
+                $('#chosenActivity').value = "No activity chosen"; // Also reset
+                return;
+            }
+
             activityResponse.textContent = "Nice! We'll do: " + labels.join(' & ') + " ❤️";
             spawnConfetti(null, 240, 40);
         }
@@ -1187,6 +1208,8 @@
             card.addEventListener('click', () => handleDinnerClick(card));
             card.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleDinnerClick(card); } });
         });
+
+        // MODIFIED: Capture dinner choice to the hidden input
         function handleDinnerClick(card) {
             // toggle selection (allow only one selection to keep it simple)
             const kind = card.dataset.dinner;
@@ -1195,16 +1218,23 @@
             if (!already) {
                 card.classList.add('selected');
                 selectedDinners = [kind];
+
+                // Set the value of the hidden input
+                const dinnerLabel = kind === 'benne' ? "Benne / South-Indian" : "Pizza Night";
+                $('#chosenDinner').value = dinnerLabel;
+
                 dinnerResponse.textContent = kind === 'benne' ? "Yum — a cozy Benne-style dinner! ❤️" : "Pizza night — fun & tasty! 🍕";
                 spawnConfetti(null, 220, 60);
             } else {
                 selectedDinners = [];
                 dinnerResponse.textContent = "";
+
+                // Reset the value of the hidden input
+                $('#chosenDinner').value = "No dinner chosen";
             }
         }
 
         // ensure page4 back button id binding (we added id to markup)
-        // const toPage3From4 = $('#toPage3From4');
         if (toPage3From4) {
             toPage3From4.addEventListener('click', () => {
                 page4.style.display = 'none';
@@ -1212,8 +1242,6 @@
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             });
         }
-
-        // final small polish: clicking Finish shows confetti (handled earlier)
 
     </script>
 </body>
