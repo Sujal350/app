@@ -742,8 +742,8 @@
                         <input id="dateInput" type="date" />
 
                         <div class="modal-actions">
-                            <button id="saveDateBtn" class="btn primary">Save</button>
-                            <button id="cancelDateBtn" class="btn secondary">Cancel</button>
+                            <button id="saveDateBtn" class="btn primary" type="button">Save</button>
+                            <button id="cancelDateBtn" class="btn secondary" type="button">Cancel</button>
                         </div>
                     </div>
                 </div>
@@ -1027,7 +1027,7 @@
         });
         cancelDateBtn.addEventListener('click', () => dateModal.classList.add('hidden'));
 
-        // MODIFIED: Capture the chosen date to the hidden input
+        // MODIFIED: Capture the chosen date to the hidden input (NOTE: Save button is now type="button")
         saveDateBtn.addEventListener('click', () => {
             const val = dateInput.value;
             if (!val) { alert('Please pick a date.'); return; }
