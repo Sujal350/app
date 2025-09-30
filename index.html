@@ -1,0 +1,1221 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Will you go on a date?</title>
+
+    <!-- Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Lora:wght@600;700&family=Montserrat:wght@300;400;600&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --peach: #FFD1C1;
+            --pink: #FF80AB;
+            --light-pink: #FFB6C1;
+            --white: #ffffff;
+            --radius: 14px;
+            --max-width: 920px;
+        }
+
+        /* Reset & base */
+        * {
+            box-sizing: border-box
+        }
+
+        html,
+        body {
+            height: 100%
+        }
+
+        body {
+            margin: 0;
+            font-family: "Montserrat", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+            background: linear-gradient(180deg, var(--light-pink) 0%, var(--peach) 100%);
+            color: #4a2a2a;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+        }
+
+        main {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 28px 20px;
+        }
+
+        .page {
+            width: 100%;
+            max-width: var(--max-width);
+            margin: 0 auto;
+            background: transparent;
+            border-radius: 18px;
+            box-shadow: none;
+            position: relative;
+        }
+
+        /* hide pages 2–4 on initial load */
+        #page2,
+        #page3,
+        #page4 {
+            display: none;
+        }
+
+        /* top romantic header (Page1) */
+        .hero-title {
+            font-family: "Great Vibes", serif;
+            font-size: 46px;
+            color: #7a2940;
+            text-align: center;
+            margin-bottom: 16px;
+            letter-spacing: 0.4px;
+            text-shadow: 0 4px 10px rgba(255, 128, 171, 0.06);
+        }
+
+        /* PAGE 1 - Surprise Reveal */
+        #page1 {
+            min-height: 78vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            gap: 12px;
+        }
+
+        .envelope-area {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .hint {
+            color: var(--white);
+            font-weight: 600;
+            background: rgba(255, 255, 255, 0.06);
+            padding: 8px 12px;
+            border-radius: 999px;
+            font-size: 14px;
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        /* envelope */
+        .envelope {
+            width: 320px;
+            height: 200px;
+            position: relative;
+            cursor: pointer;
+            transform-style: preserve-3d;
+            perspective: 800px;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .env-body {
+            position: absolute;
+            left: 8%;
+            right: 8%;
+            top: 24%;
+            bottom: 6%;
+            background: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .env-flap {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            height: 50%;
+            background: linear-gradient(180deg, var(--light-pink), var(--pink));
+            border-top-left-radius: 14px;
+            border-top-right-radius: 14px;
+            transform-origin: 50% 30%;
+            transition: transform 700ms cubic-bezier(.22, .9, .21, 1);
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
+        }
+
+        .envelope.pulse .env-flap {
+            animation: gentlePulse 1800ms ease-in-out infinite;
+        }
+
+        @keyframes gentlePulse {
+            0% {
+                transform: translateY(0) scale(1)
+            }
+
+            50% {
+                transform: translateY(-6px) scale(1.02)
+            }
+
+            100% {
+                transform: translateY(0) scale(1)
+            }
+        }
+
+        .envelope.opened .env-flap {
+            transform: rotateX(-180deg) translateY(-6px);
+        }
+
+        /* message card that slides up from inside the envelope */
+        .message-card {
+            position: absolute;
+            left: 50%;
+            transform: translate(-50%, 40px);
+            top: 35%;
+            width: 86%;
+            padding: 18px;
+            background: transparent;
+            text-align: center;
+            opacity: 0;
+            transition: transform 700ms cubic-bezier(.22, .9, .21, 1), opacity 500ms ease;
+            pointer-events: none;
+        }
+
+        .envelope.opened .message-card {
+            transform: translate(-50%, -84px);
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .message-card h1 {
+            margin: 0 0 12px 0;
+            font-family: "Lora", serif;
+            font-size: 22px;
+            color: #721a31;
+            line-height: 1.1;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 6px;
+        }
+
+        .btn {
+            border: 0;
+            padding: 10px 16px;
+            border-radius: 999px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 15px;
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+            transition: transform 160ms ease, box-shadow 160ms ease;
+        }
+
+        .btn:active {
+            transform: translateY(1px);
+        }
+
+        .btn:focus {
+            outline: 3px solid rgba(255, 255, 255, 0.22);
+        }
+
+        .btn.primary {
+            background: var(--pink);
+            color: var(--white);
+        }
+
+        .btn.secondary {
+            background: var(--peach);
+            color: #6a2f2f;
+        }
+
+        .response {
+            margin-top: 10px;
+            font-weight: 600;
+            color: #6a2f2f;
+        }
+
+        /* hidden Next button (appears after accept or date saved) */
+        #toPage2 {
+            margin-top: 18px;
+            display: inline-block;
+            background: var(--peach);
+            color: #6a2f2f;
+            padding: 10px 14px;
+            border-radius: 999px;
+            border: 0;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            transition: transform 160ms ease;
+            display: none;
+        }
+
+        #toPage2.show {
+            display: inline-block;
+        }
+
+        /* confetti canvas */
+        #confettiCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 999;
+        }
+
+        /* modal (date picker) */
+        .modal {
+            position: fixed;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.24);
+            z-index: 50;
+            padding: 20px;
+        }
+
+        .modal.hidden {
+            display: none;
+        }
+
+        .modal-content {
+            background: var(--peach);
+            border-radius: 14px;
+            padding: 18px;
+            min-width: 280px;
+            box-shadow: 0 24px 48px rgba(0, 0, 0, 0.18);
+            color: #6a2f2f;
+        }
+
+        .modal-content label {
+            display: block;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .modal-content input[type="date"] {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: 0;
+            font-size: 15px;
+            margin-bottom: 12px;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+        }
+
+        /* STORY SECTIONS (page2, page3, page4 use similar styles) */
+        .story {
+            max-width: 820px;
+            margin: 0 auto;
+        }
+
+        .story-section {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 18px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.04);
+            opacity: 0;
+            transform: translateY(18px);
+            transition: opacity 600ms ease, transform 600ms ease;
+        }
+
+        .story-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .story-section h2,
+        .story-section h3 {
+            margin: 0 0 8px 0;
+            font-family: "Lora", serif;
+            color: #7a2b41;
+        }
+
+        .story-section p {
+            margin: 0;
+            color: #5d3a3a;
+            line-height: 1.5;
+        }
+
+        /* images */
+        .temple-illustration {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .temple-illustration img {
+            display: block;
+            margin: 0 auto;
+            width: 100%;
+            max-width: 320px;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+        }
+
+        /* sweets / activities cards */
+        .sweets {
+            display: flex;
+            gap: 14px;
+            margin-top: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .sweet-card {
+            min-width: 140px;
+            flex: 1 1 140px;
+            max-width: 260px;
+            background: linear-gradient(180deg, var(--white), rgba(255, 255, 255, 0.94));
+            border-radius: 12px;
+            padding: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            justify-content: flex-start;
+            cursor: pointer;
+            border: 4px solid transparent;
+            transition: transform 260ms cubic-bezier(.2, .9, .2, 1), box-shadow 260ms ease, border-color 200ms ease;
+            position: relative;
+            overflow: visible;
+        }
+
+        .sweet-card .icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            overflow: hidden;
+        }
+
+        .sweet-card .icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 220ms ease;
+        }
+
+        .sweet-card .label {
+            font-weight: 700;
+            color: #5a2b2b;
+        }
+
+        .sweet-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 18px 36px rgba(0, 0, 0, 0.06);
+        }
+
+        .sweet-card.selected {
+            border-color: var(--pink);
+            box-shadow: 0 18px 36px rgba(255, 128, 171, 0.08);
+            transform: translateY(-10px) scale(1.02);
+        }
+
+        .sweet-card.selected .icon img {
+            transform: scale(1.08);
+        }
+
+        .sweet-response {
+            margin-top: 10px;
+            font-weight: 700;
+            text-align: center;
+            color: #6a2f2f;
+        }
+
+        .close-line {
+            margin-top: 22px;
+            text-align: center;
+            font-family: "Lora", serif;
+            font-size: 20px;
+            color: #7a2b41;
+        }
+
+        .nav-bottom {
+            margin-top: 22px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .nav-bottom button {
+            background: var(--pink);
+            color: var(--white);
+            border: 0;
+            padding: 10px 14px;
+            border-radius: 999px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        /* PAGE 3 / larger activity icons override */
+        .sweets.activities .sweet-card {
+            max-width: 360px;
+            min-width: 180px;
+            padding: 14px;
+            gap: 16px;
+        }
+
+        .sweets.activities .sweet-card .icon {
+            width: 90px;
+            height: 90px;
+            border-radius: 12px;
+        }
+
+        .sweets.activities .sweet-card .icon img {
+            border-radius: 12px;
+        }
+
+        /* PAGE 3 decorative / animations */
+        #page3 {
+            display: none;
+            padding: 32px 18px;
+            border-radius: 18px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(255, 241, 238, 0.92));
+            position: relative;
+            overflow: hidden;
+        }
+
+        .waves {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: -6px;
+            height: 120px;
+            pointer-events: none;
+            opacity: 0.42;
+        }
+
+        .music-notes {
+            position: absolute;
+            right: 18px;
+            top: 16px;
+            pointer-events: none;
+            opacity: 0.95;
+        }
+
+        .music-note {
+            animation: floatUp 3600ms ease-in-out infinite;
+            transform-origin: center;
+        }
+
+        .music-note:nth-child(2) {
+            animation-delay: 480ms;
+            animation-duration: 4200ms;
+            transform-origin: center;
+        }
+
+        .music-note:nth-child(3) {
+            animation-delay: 980ms;
+            animation-duration: 4000ms;
+            transform-origin: center;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(6px) scale(0.96);
+                opacity: 0.0;
+            }
+
+            20% {
+                opacity: 0.9;
+            }
+
+            100% {
+                transform: translateY(-82px) scale(1.02);
+                opacity: 0;
+            }
+        }
+
+        .play-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 62px;
+            height: 62px;
+            border-radius: 999px;
+            background: linear-gradient(180deg, var(--pink), var(--light-pink));
+            box-shadow: 0 12px 26px rgba(255, 128, 171, 0.12);
+            cursor: pointer;
+            border: 6px solid rgba(255, 255, 255, 0.18);
+            transition: transform 220ms ease, box-shadow 220ms ease;
+            margin: 12px auto;
+            animation: pulsePlay 2000ms ease-in-out infinite;
+        }
+
+        @keyframes pulsePlay {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 12px 26px rgba(255, 128, 171, 0.12);
+            }
+
+            50% {
+                transform: scale(1.06);
+                box-shadow: 0 18px 36px rgba(255, 128, 171, 0.16);
+            }
+
+            100% {
+                transform: scale(1);
+                box-shadow: 0 12px 26px rgba(255, 128, 171, 0.12);
+            }
+        }
+
+        .heart-bubble {
+            position: absolute;
+            left: 24px;
+            top: 18px;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0.0;
+            transform: translateY(0) scale(0.9);
+        }
+
+        .spawn-heart {
+            animation: heartUp 1200ms ease forwards;
+        }
+
+        @keyframes heartUp {
+            0% {
+                opacity: 0;
+                transform: translateY(8px) scale(0.9);
+            }
+
+            20% {
+                opacity: 1;
+                transform: translateY(-8px) scale(1.08);
+            }
+
+            100% {
+                opacity: 0;
+                transform: translateY(-60px) scale(1.0);
+            }
+        }
+
+        /* PAGE 4 */
+        #page4 {
+            display: none;
+            padding: 32px 18px;
+            border-radius: 18px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(255, 241, 238, 0.94));
+            position: relative;
+        }
+
+        .dinner-cards {
+            display: flex;
+            gap: 14px;
+            justify-content: center;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            margin-top: 12px;
+        }
+
+        .dinner-card {
+            width: 280px;
+            max-width: 42%;
+            background: var(--white);
+            border-radius: 12px;
+            padding: 14px;
+            text-align: center;
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.05);
+            border: 4px solid transparent;
+            transition: transform 220ms ease, box-shadow 220ms ease, border-color 200ms ease;
+            cursor: pointer;
+        }
+
+        .dinner-card img {
+            width: 100%;
+            max-width: 240px;
+            height: auto;
+            border-radius: 10px;
+            display: block;
+            margin: 0 auto 8px auto;
+        }
+
+        .dinner-card h4 {
+            margin: 6px 0 0 0;
+            font-weight: 700;
+            color: #5a2b2b;
+        }
+
+        .dinner-card.selected {
+            border-color: var(--pink);
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(255, 128, 171, 0.06);
+        }
+
+        .dessert-large {
+            margin-top: 18px;
+            text-align: center;
+        }
+
+        .dessert-large img {
+            width: 50%;
+            max-width: 220px;
+            border-radius: 14px;
+            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.06);
+        }
+
+        /* responsive */
+        @media (max-width:720px) {
+            .temple-illustration img {
+                max-width: 260px;
+            }
+
+            .sweet-card {
+                max-width: 200px;
+            }
+
+            .music-notes {
+                display: none;
+            }
+
+            .dinner-card {
+                width: 100%;
+                max-width: 360px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="confettiCanvas"></canvas>
+
+    <main>
+        <!-- PAGE 1 -->
+        <section id="page1" class="page" aria-labelledby="p1title">
+            <div class="hero-title">Maru Nilu tu mara saathe date par chalis su 🫶🏻🩷❤️</div>
+
+            <div class="envelope-area">
+                <div class="hint">Click to open</div>
+
+                <div id="envelope" class="envelope pulse" role="button" tabindex="0" aria-pressed="false"
+                    aria-label="Open envelope to reveal message">
+                    <div class="env-flap" aria-hidden="true"></div>
+                    <div class="env-body" aria-hidden="true"></div>
+
+                    <div class="message-card" role="region" aria-live="polite">
+                        <h1 id="p1title">Will you go on a date with me?</h1>
+
+                        <div class="buttons">
+                            <button id="yesBtn" class="btn primary" aria-label="Say Yes">Yes ❤️</button>
+                            <button id="pickBtn" class="btn secondary" aria-label="Pick a day">Pick a day 📅</button>
+                        </div>
+
+                        <div id="response" class="response" aria-live="polite"></div>
+                    </div>
+                </div>
+
+                <button id="toPage2" aria-label="Go to next page">Next ➡️</button>
+            </div>
+
+            <!-- Date modal -->
+            <div id="dateModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="dateLabel">
+                <div class="modal-content">
+                    <label id="dateLabel">Choose our date night:</label>
+                    <input id="dateInput" type="date" />
+
+                    <div class="modal-actions">
+                        <button id="saveDateBtn" class="btn primary">Save</button>
+                        <button id="cancelDateBtn" class="btn secondary">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE 2 -->
+        <section id="page2" class="page" aria-labelledby="p2title">
+            <div class="story">
+                <section class="story-section" id="temple">
+                    <h2 id="p2title">Where it all began 💕</h2>
+                    <div class="temple-illustration">
+                        <img src="D:\Research\date-site\images\iskcon.png" alt="ISKCON Temple" />
+                    </div>
+                    <p>We first met at the ISKCON temple — in the calm, divine presence, seeking blessings together.</p>
+                </section>
+
+                <section class="story-section" id="peace">
+                    <h3>Sitting in peace together 🌸</h3>
+                    <p>We sat in the serene environment, away from the noise of the world… just the two of us.</p>
+                </section>
+
+                <section class="story-section" id="sweet">
+                    <h3>And then came something sweet ❤️</h3>
+                    <p style="text-align:center; margin-top:8px;">Choose what we shared that day…</p>
+
+                    <div class="sweets" role="list" aria-label="Sweet choices">
+                        <div class="sweet-card" data-sweet="rasgulla" role="button" tabindex="0" aria-pressed="false"
+                            aria-label="Choose Rasgulla">
+                            <div class="icon"><img src="D:\Research\date-site\images\rasgulla.png" alt="Rasgulla" />
+                            </div>
+                            <div class="label">Rasgulla</div>
+                        </div>
+
+                        <div class="sweet-card" data-sweet="dahiwada" role="button" tabindex="0" aria-pressed="false"
+                            aria-label="Choose Dahi Vada">
+                            <div class="icon"><img src="D:\Research\date-site\images\dhai_vada.png" alt="Dahi Vada" />
+                            </div>
+                            <div class="label">Dahi Vada</div>
+                        </div>
+                    </div>
+
+                    <div id="sweetResponse" class="sweet-response" aria-live="polite"></div>
+                </section>
+
+                <div class="close-line">That day was just the beginning of something so special ✨</div>
+
+                <div class="nav-bottom">
+                    <button id="toPage3">Next ➡️</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE 3 - Beach + Activities -->
+        <section id="page3" class="page" aria-labelledby="p3title">
+            <div class="story">
+                <section class="story-section" id="music">
+                    <h2 id="p3title">Sunset & Songs 🌅🎶</h2>
+
+                    <div style="text-align:center; margin:14px 0;">
+                        <img src="D:\Research\date-site\images\songs.png" alt="Songs we will listen to"
+                            style="width:100%; max-width:520px; border-radius:12px; box-shadow: 0 12px 28px rgba(0,0,0,0.06);" />
+                    </div>
+
+                    <div style="text-align:center;">
+                        <div class="play-btn" id="playBtn" role="button" tabindex="0" aria-pressed="false"
+                            aria-label="Play songs">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="white" aria-hidden="true">
+                                <path d="M5 3v18l15-9z" />
+                            </svg>
+                        </div>
+                    </div>
+
+                    <p style="margin-top:12px;">We'll sit on the beach, chill and enjoy the sunset while listening to
+                        these songs — just you and me.</p>
+                </section>
+
+                <section class="story-section" id="activity">
+                    <h3>Which activity shall we do? 🎨</h3>
+                    <p style="text-align:center; margin-top:8px;">Choose one (or both!) — both are little keepsakes we
+                        can make together.</p>
+
+                    <div class="sweets activities" role="list" aria-label="Activity choices" style="margin-top:12px;">
+                        <div class="sweet-card" data-activity="beads" role="button" tabindex="0" aria-pressed="false"
+                            aria-label="Make bracelets and necklace">
+                            <div class="icon"><img src="D:\Research\date-site\images\beads.png" alt="Beads craft" />
+                            </div>
+                            <div class="label">Make bracelets & necklace</div>
+                        </div>
+
+                        <div class="sweet-card" data-activity="frame" role="button" tabindex="0" aria-pressed="false"
+                            aria-label="Make handprint frame">
+                            <div class="icon"><img src="D:\Research\date-site\images\frame.jpeg"
+                                    alt="Handprint frame craft" /></div>
+                            <div class="label">Cute handprint frame</div>
+                        </div>
+                    </div>
+
+                    <div id="activityResponse" class="sweet-response" aria-live="polite" style="margin-top:12px;"></div>
+                </section>
+
+                <div class="close-line">Sunsets, songs, and little keepsakes — perfect memories ✨</div>
+
+                <div class="nav-bottom" style="margin-top:18px;">
+                    <button id="toPage2From3" class="btn secondary" style="margin-right:10px;">Back</button>
+                    <button id="toPage4" class="btn primary">Next ➡️</button>
+                </div>
+            </div>
+
+            <!-- decorative waves & animation elements -->
+            <div class="music-notes" aria-hidden="true" style="right:18px; top:8px;">
+                <svg class="music-note" width="28" height="28" viewBox="0 0 24 24" fill="none"
+                    style="display:block; margin-bottom:6px;">
+                    <path d="M12 3v10.55A4 4 0 1 0 14 17V7" stroke="#FF80AB" stroke-width="1.6" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+                <svg class="music-note" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                    style="display:block; margin-bottom:6px;">
+                    <path d="M9 3v12a3 3 0 1 0 2-2V6" stroke="#FFB6C1" stroke-width="1.6" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+            </div>
+
+            <div class="heart-bubble" id="heartBubble" aria-hidden="true">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="#FF80AB">
+                    <path
+                        d="M12 21s-7-4.35-9-7.28C.9 9.83 4 5 8 6.5 9.7 7.2 12 9 12 9s2.3-1.8 4-2.5c4-1.5 7.1 3.33 5 7.22C19 16.65 12 21 12 21z" />
+                </svg>
+            </div>
+
+            <svg class="waves" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
+                <defs>
+                    <linearGradient id="g1" x1="0" x2="1" y1="0" y2="0">
+                        <stop offset="0" stop-color="#FFB6C1" stop-opacity="0.35"></stop>
+                        <stop offset="1" stop-color="#FFD1C1" stop-opacity="0.35"></stop>
+                    </linearGradient>
+                </defs>
+                <path d="M0,40 C240,120 420,0 720,40 C1020,80 1200,20 1440,40 L1440 120 L0 120 Z" fill="url(#g1)">
+                </path>
+            </svg>
+        </section>
+
+        <!-- PAGE 4 - Romantic Dinner + Dessert -->
+        <section id="page4" class="page" aria-labelledby="p4title">
+            <div class="story">
+                <section class="story-section" id="dinnerIntro">
+                    <h2 id="p4title">Dinner & Dessert 🍽️🍦</h2>
+                    <p>Let’s end the day with a cozy romantic dinner. Choose where we should enjoy our meal tonight.</p>
+                </section>
+
+                <section class="story-section" id="dinnerChoices">
+                    <div class="dinner-cards" role="list" aria-label="Dinner choices">
+                        <div class="dinner-card" data-dinner="benne" role="button" tabindex="0" aria-pressed="false"
+                            aria-label="South Indian benne food">
+                            <img src="D:\Research\date-site\images\benne.png" alt="Benne / South-Indian style food">
+                            <h4>Beautiful South-Indian style (Benne)</h4>
+                        </div>
+
+                        <div class="dinner-card" data-dinner="pizza" role="button" tabindex="0" aria-pressed="false"
+                            aria-label="Pizza">
+                            <img src="D:\Research\date-site\images\pizza.png" alt="Pizza">
+                            <h4>Pizza night 🍕</h4>
+                        </div>
+                    </div>
+
+                    <div id="dinnerResponse" class="sweet-response" aria-live="polite" style="margin-top:12px;"></div>
+                </section>
+
+                <section class="story-section" id="dessert">
+                    <div class="dessert-large">
+                        <img src="D:\Research\date-site\images\icecream.png" alt="Ice cream dessert" />
+                        <div class="close-line" style="margin-top:12px;">We end our day with dessert — ice cream 🍨 —
+                            and we made beautiful memories today to cherish for a lifetime.</div>
+                    </div>
+                </section>
+
+                <div class="nav-bottom" style="margin-top:18px;">
+                    <button id="toPage3From4" class="btn secondary" style="margin-right:10px;">Back</button>
+                    <button id="finishBtn" class="btn primary">Finish ❤️</button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        /* ====== Utilities ====== */
+        const $ = sel => document.querySelector(sel);
+        const $$ = sel => Array.from(document.querySelectorAll(sel));
+
+        /* ====== Envelope & reveal ====== */
+        const envelope = $('#envelope');
+        const yesBtn = $('#yesBtn');
+        const pickBtn = $('#pickBtn');
+        const responseEl = $('#response');
+        const toPage2Btn = $('#toPage2');
+        const dateModal = $('#dateModal');
+        const dateInput = $('#dateInput');
+        const saveDateBtn = $('#saveDateBtn');
+        const cancelDateBtn = $('#cancelDateBtn');
+
+        envelope.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openEnvelope(); } });
+        envelope.addEventListener('click', openEnvelope);
+        function openEnvelope() {
+            if (!envelope.classList.contains('opened')) {
+                envelope.classList.remove('pulse');
+                envelope.classList.add('opened');
+                envelope.setAttribute('aria-pressed', 'true');
+            }
+        }
+
+        /* ====== CONFETTI (simple canvas) ====== */
+        const canvas = $('#confettiCanvas');
+        const ctx = canvas.getContext('2d');
+        let confettiParticles = [];
+        let confettiAnimating = false;
+        function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        window.addEventListener('resize', resizeCanvas); resizeCanvas();
+        function rand(min, max) { return Math.random() * (max - min) + min; }
+        function spawnConfetti(x = null, y = 80, count = 80) {
+            const root = getComputedStyle(document.documentElement);
+            const palette = [root.getPropertyValue('--peach').trim() || '#FFD1C1', root.getPropertyValue('--pink').trim() || '#FF80AB', root.getPropertyValue('--light-pink').trim() || '#FFB6C1'];
+            for (let i = 0; i < count; i++) {
+                confettiParticles.push({
+                    x: x === null ? rand(0, canvas.width) : x + rand(-40, 40),
+                    y: y + rand(-10, 40),
+                    vx: rand(-2.4, 2.4),
+                    vy: rand(-1, 3),
+                    size: rand(6, 12),
+                    angle: rand(0, Math.PI * 2),
+                    spin: rand(-0.12, 0.12),
+                    color: palette[Math.floor(rand(0, palette.length))]
+                });
+            }
+            if (!confettiAnimating) { confettiAnimating = true; requestAnimationFrame(confettiFrame); }
+        }
+        function confettiFrame() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = confettiParticles.length - 1; i >= 0; i--) {
+                const p = confettiParticles[i];
+                p.x += p.vx;
+                p.y += p.vy;
+                p.vy += 0.06;
+                p.angle += p.spin;
+                ctx.save();
+                ctx.translate(p.x, p.y);
+                ctx.rotate(p.angle);
+                ctx.fillStyle = p.color;
+                ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
+                ctx.restore();
+                if (p.y > canvas.height + 40 || p.x < -50 || p.x > canvas.width + 50) confettiParticles.splice(i, 1);
+            }
+            if (confettiParticles.length > 0) requestAnimationFrame(confettiFrame);
+            else confettiAnimating = false;
+        }
+
+        /* ====== Page 1 interactions ====== */
+        yesBtn.addEventListener('click', () => {
+            responseEl.textContent = "Yay! I can't wait 💕";
+            toPage2Btn.classList.add('show');
+            spawnConfetti(null, 140, 110);
+        });
+
+        pickBtn.addEventListener('click', () => {
+            dateModal.classList.remove('hidden');
+            const today = new Date().toISOString().slice(0, 10);
+            dateInput.value = '';
+            dateInput.setAttribute('min', today);
+            dateInput.focus();
+        });
+        cancelDateBtn.addEventListener('click', () => dateModal.classList.add('hidden'));
+        saveDateBtn.addEventListener('click', () => {
+            const val = dateInput.value;
+            if (!val) { alert('Please pick a date.'); return; }
+            const nice = formatDateNice(val);
+            responseEl.textContent = `Perfect! Our date is set for ${nice} ❤️`;
+            dateModal.classList.add('hidden');
+            toPage2Btn.classList.add('show');
+            spawnConfetti(null, 140, 90);
+        });
+        function formatDateNice(iso) { const d = new Date(iso + 'T00:00:00'); return d.toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }); }
+        window.addEventListener('keydown', (e) => { if (e.key === 'Escape') { if (!dateModal.classList.contains('hidden')) dateModal.classList.add('hidden'); } });
+
+        /* ====== Page navigation variables ====== */
+        // const page1 = $('#page1');
+        // const page2 = $('#page2');
+        // const page3 = $('#page3');
+        // const page4 = $('#page4');
+        // const toPage3Btn = $('#toPage3');
+        // const toPage2From3 = $('#toPage2From3');
+        // const toPage4Btn = $('#toPage4');
+        // const toPage3From4 = $('#toPage3From4'); // not present (we use toPage3From4 id below)
+        // const toPage2BtnShown = $('#toPage2');
+
+
+        const page1 = $('#page1');
+        const page2 = $('#page2');
+        const page3 = $('#page3');
+        const page4 = $('#page4');
+
+        const toPage3Btn = $('#toPage3');
+        const toPage2From3 = $('#toPage2From3');
+        const toPage4Btn = $('#toPage4');
+        const toPage3From4 = $('#toPage3From4'); // Back button on page4
+        const toPage2BtnShown = $('#toPage2');
+
+        /* Page1 -> Page2 */
+        $('#toPage2').addEventListener('click', () => {
+            page1.style.display = 'none';
+            page2.style.display = 'block';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            setTimeout(() => { $$('.story-section').forEach(s => s.classList.add('visible')); }, 160);
+        });
+
+        /* Page2 -> Page3 */
+        if (toPage3Btn) {
+            toPage3Btn.addEventListener('click', () => {
+                page2.style.display = 'none';
+                page3.style.display = 'block';
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                setTimeout(() => { $$('#page3 .story-section').forEach(s => s.classList.add('visible')); }, 160);
+            });
+        }
+
+        /* Page3 -> Page2 (back) */
+        if ($('#toPage2From3')) {
+            $('#toPage2From3').addEventListener('click', () => {
+                page3.style.display = 'none';
+                page2.style.display = 'block';
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        }
+
+        /* Page3 -> Page4 */
+        if (toPage4Btn) {
+            toPage4Btn.addEventListener('click', () => {
+                page3.style.display = 'none';
+                page4.style.display = 'block';
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                setTimeout(() => { $$('#page4 .story-section').forEach(s => s.classList.add('visible')); }, 160);
+            });
+        }
+
+        /* Page4 back -> Page3 */
+        if ($('#toPage3From4')) {
+            $('#toPage3From4').addEventListener('click', () => {
+                page4.style.display = 'none';
+                page3.style.display = 'block';
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        } else {
+            // we used id "toPage3From4" earlier in markup as "toPage3From4" — ensure it's bound:
+            const toP3From4 = $('#toPage3From4');
+            if (toP3From4) {
+                toP3From4.addEventListener('click', () => {
+                    page4.style.display = 'none';
+                    page3.style.display = 'block';
+                });
+            }
+        }
+
+        /* Finish button (final) */
+        const finishBtn = $('#finishBtn');
+        if (finishBtn) {
+            finishBtn.addEventListener('click', () => {
+                spawnConfetti(null, 140, 160);
+                alert("What a day! 💕 It's a date — beautiful memories forever.");
+            });
+        }
+
+        /* ====== Page 2 interactions (sweets) ====== */
+        const sweetCards = $$('.sweet-card[data-sweet]');
+        const sweetResponse = $('#sweetResponse');
+        sweetCards.forEach(card => {
+            card.addEventListener('click', () => handleSweetClick(card));
+            card.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleSweetClick(card); } });
+        });
+        function handleSweetClick(card) {
+            const kind = card.dataset.sweet;
+            const selected = card.classList.toggle('selected');
+            card.setAttribute('aria-pressed', selected ? 'true' : 'false');
+            if (selected) {
+                if (kind === 'rasgulla') {
+                    sweetResponse.textContent = "Sweet like our first moment 💕";
+                } else {
+                    sweetResponse.textContent = "Tangy, tasty, and unforgettable ❤️";
+                }
+                spawnConfetti(null, 200, 60);
+            } else {
+                sweetResponse.textContent = "";
+            }
+        }
+
+        /* intersection observer for reveal on scroll */
+        const sections = $$('.story-section');
+        const io = new IntersectionObserver(entries => {
+            entries.forEach(en => { if (en.isIntersecting) en.target.classList.add('visible'); });
+        }, { threshold: 0.18 });
+        sections.forEach(s => io.observe(s));
+
+        /* focus yes button after envelope animation */
+        envelope.addEventListener('transitionend', (e) => { if (envelope.classList.contains('opened')) yesBtn.focus(); });
+
+        /* ====== Page 3: play button & activities ====== */
+        const playBtn = $('#playBtn');
+        const heartBubble = $('#heartBubble');
+        function spawnHeart() {
+            heartBubble.classList.remove('spawn-heart');
+            void heartBubble.offsetWidth;
+            heartBubble.classList.add('spawn-heart');
+            spawnConfetti(null, 220, 28);
+        }
+        if (playBtn) {
+            playBtn.addEventListener('click', () => {
+                const pressed = playBtn.getAttribute('aria-pressed') === 'true';
+                playBtn.setAttribute('aria-pressed', (!pressed).toString());
+                spawnHeart();
+            });
+            playBtn.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); playBtn.click(); } });
+        }
+
+        /* activities */
+        const activityEls = Array.from(document.querySelectorAll('.sweet-card[data-activity]'));
+        const activityResponse = $('#activityResponse');
+        activityEls.forEach(card => {
+            card.addEventListener('click', () => handleActivityClick(card));
+            card.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleActivityClick(card); } });
+        });
+        function handleActivityClick(card) {
+            const kind = card.dataset.activity;
+            const selected = card.classList.toggle('selected');
+            card.setAttribute('aria-pressed', selected ? 'true' : 'false');
+            const picked = Array.from(document.querySelectorAll('.sweet-card[data-activity].selected')).map(c => c.dataset.activity);
+            if (picked.length === 0) { activityResponse.textContent = ""; return; }
+            const labels = picked.map(k => k === 'beads' ? 'Beads craft' : 'Handprint frame');
+            activityResponse.textContent = "Nice! We'll do: " + labels.join(' & ') + " ❤️";
+            spawnConfetti(null, 240, 40);
+        }
+
+        /* ====== Page 4: dinner choices ====== */
+        const dinnerCards = Array.from(document.querySelectorAll('.dinner-card'));
+        const dinnerResponse = $('#dinnerResponse');
+        let selectedDinners = [];
+        dinnerCards.forEach(card => {
+            card.addEventListener('click', () => handleDinnerClick(card));
+            card.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleDinnerClick(card); } });
+        });
+        function handleDinnerClick(card) {
+            // toggle selection (allow only one selection to keep it simple)
+            const kind = card.dataset.dinner;
+            const already = card.classList.contains('selected');
+            dinnerCards.forEach(c => c.classList.remove('selected'));
+            if (!already) {
+                card.classList.add('selected');
+                selectedDinners = [kind];
+                dinnerResponse.textContent = kind === 'benne' ? "Yum — a cozy Benne-style dinner! ❤️" : "Pizza night — fun & tasty! 🍕";
+                spawnConfetti(null, 220, 60);
+            } else {
+                selectedDinners = [];
+                dinnerResponse.textContent = "";
+            }
+        }
+
+        // ensure page4 back button id binding (we added id to markup)
+        // const toPage3From4 = $('#toPage3From4');
+        if (toPage3From4) {
+            toPage3From4.addEventListener('click', () => {
+                page4.style.display = 'none';
+                page3.style.display = 'block';
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        }
+
+        // final small polish: clicking Finish shows confetti (handled earlier)
+
+    </script>
+</body>
+
+</html>
